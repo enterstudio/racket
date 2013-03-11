@@ -825,19 +825,19 @@
                                       (syntax-protect
                                        (quasisyntax/loc stx
                                          (begin
+                                           #,(quasisyntax/loc stx 
+                                               (define #,core-id #,(core-wrap impl)))
+                                           #,(quasisyntax/loc stx 
+                                               (define #,unpack-id #,kwimpl))
+                                           #,(quasisyntax/loc stx 
+                                               (define proc #,wrap))
                                            #,(quasisyntax/loc stx
                                                (define-syntax #,id 
                                                  (make-keyword-syntax (lambda () 
                                                                         (values (quote-syntax #,core-id)
                                                                                 (quote-syntax proc)))
                                                                       #,n-req #,n-opt #,rest? 
-                                                                      '#,req-kws '#,all-kws)))
-                                           #,(quasisyntax/loc stx 
-                                               (define #,core-id #,(core-wrap impl)))
-                                           #,(quasisyntax/loc stx 
-                                               (define #,unpack-id #,kwimpl))
-                                           #,(quasisyntax/loc stx 
-                                               (define proc #,wrap)))))))))])
+                                                                      '#,req-kws '#,all-kws))))))))))])
         (syntax-case rhs (begin quote)
           [(lam-id . _)
            (can-opt? #'lam-id)
